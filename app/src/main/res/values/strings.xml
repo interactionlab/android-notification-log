@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Notification Log</string>
+
+    <string name="activity_browse">Browse</string>
+    <string name="activity_details">Details</string>
+
+    <string name="menu_delete">Delete log</string>
+    <string name="menu_export">Export log</string>
+    <string name="menu_refresh">Refresh</string>
+
+    <string name="settings_status">Status</string>
+    <string name="settings_notification_access_unknown">Unknown</string>
+    <string name="settings_notification_access_enabled">Enabled</string>
+    <string name="settings_notification_access_disabled">Disabled</string>
+
+    <string name="settings_text">Text</string>
+    <string name="settings_text_summary">Log the notifications\' text. Increases the size of the log file but allows you to read past messages.</string>
+
+    <string name="settings_ongoing">Ongoing</string>
+    <string name="settings_ongoing_summary">Log ongoing notifications, for example download progresses. Creates a large number of additional log entries.</string>
+
+    <string name="settings_browse">Browse</string>
+    <string name="settings_browse_summary">Look at the most recent notifications</string>
+
+    <string name="settings_entries">Notifications logged</string>
+    <string name="settings_version">Version</string>
+
+    <string name="dialog_delete_header">Confirm deletion</string>
+    <string name="dialog_delete_text">Do you really want to delete the log file? This cannot be undone.</string>
+    <string name="dialog_delete_yes">Delete</string>
+    <string name="dialog_delete_no">Cancel</string>
+
+    <string name="snackbar_export">Exporting… please wait…</string>
+
+    <string name="details_error">Unable to load the details of this entry.</string>
+
+    <string name="empty_log_file">No notifications logged yet! Is the notification access enabled?</string>
+
+</resources>

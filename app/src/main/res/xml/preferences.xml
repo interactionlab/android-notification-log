@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:key="pref_status"
+        android:title="@string/settings_status"
+        android:summary="@string/settings_notification_access_unknown" />
+
+    <SwitchPreference
+        android:key="pref_text"
+        android:title="@string/settings_text"
+        android:summary="@string/settings_text_summary"
+        android:defaultValue="true" />
+
+    <SwitchPreference
+        android:key="pref_ongoing"
+        android:title="@string/settings_ongoing"
+        android:summary="@string/settings_ongoing_summary"
+        android:defaultValue="false" />
+
+    <Preference
+        android:key="pref_browse"
+        android:title="@string/settings_browse" />
+
+    <Preference
+        android:key="pref_entries"
+        android:title="@string/settings_entries"
+        android:summary="0"
+        android:enabled="false" />
+
+    <Preference
+        android:key="pref_version"
+        android:title="@string/settings_version"
+        android:summary="0"
+        android:enabled="false" />
+
+</PreferenceScreen>
