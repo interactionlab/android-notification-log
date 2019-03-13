@@ -1,4 +1,4 @@
-package org.hcilab.projects.nlog;
+package org.hcilab.projects.nlogx;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

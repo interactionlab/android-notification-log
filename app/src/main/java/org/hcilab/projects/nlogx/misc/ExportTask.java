@@ -1,4 +1,4 @@
-package org.hcilab.projects.nlog.misc;
+package org.hcilab.projects.nlogx.misc;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.FileProvider;
 import android.view.View;
 
-import org.hcilab.projects.nlog.BuildConfig;
-import org.hcilab.projects.nlog.R;
+import org.hcilab.projects.nlogx.BuildConfig;
+import org.hcilab.projects.nlogx.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -195,7 +195,7 @@ public class ExportTask extends AsyncTask<Void, Void, Void> {
 		}
 
 		// Get the content provider URI
-		Uri contentUri = FileProvider.getUriForFile(context, "org.hcilab.projects.nlog.fileprovider", newFile);
+		Uri contentUri = FileProvider.getUriForFile(context, "org.hcilab.projects.nlogx.fileprovider", newFile);
 
 		// Open the share dialog
 		Intent sharingIntent = new Intent(Intent.ACTION_SEND);

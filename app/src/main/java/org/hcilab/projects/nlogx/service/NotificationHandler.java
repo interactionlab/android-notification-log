@@ -1,4 +1,4 @@
-package org.hcilab.projects.nlog.service;
+package org.hcilab.projects.nlogx.service;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,12 +9,12 @@ import android.service.notification.StatusBarNotification;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.preference.PreferenceManager;
 
-import org.hcilab.projects.nlog.misc.Const;
-import org.hcilab.projects.nlog.misc.DatabaseHelper;
+import org.hcilab.projects.nlogx.misc.Const;
+import org.hcilab.projects.nlogx.misc.DatabaseHelper;
 
 public class NotificationHandler {
 
-	public static final String BROADCAST = "org.hcilab.projects.nlog.update";
+	public static final String BROADCAST = "org.hcilab.projects.nlogx.update";
 	public static final String LOCK = "lock";
 
 	private Context context;

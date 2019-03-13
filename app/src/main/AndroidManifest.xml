@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.hcilab.projects.nlog">
+    package="org.hcilab.projects.nlogx">
 
     <!-- Normal Permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -75,7 +75,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="org.hcilab.projects.nlog.fileprovider"
+            android:authorities="org.hcilab.projects.nlogx.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

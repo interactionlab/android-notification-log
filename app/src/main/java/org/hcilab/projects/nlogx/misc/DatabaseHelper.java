@@ -1,4 +1,4 @@
-package org.hcilab.projects.nlog.misc;
+package org.hcilab.projects.nlogx.misc;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Notification Log</string>
+    <string name="app_name">Notification Log X</string>
 
     <string name="activity_browse">Browse</string>
     <string name="activity_details">Details</string>

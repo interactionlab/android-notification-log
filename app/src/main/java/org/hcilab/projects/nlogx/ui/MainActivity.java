@@ -1,4 +1,4 @@
-package org.hcilab.projects.nlog.ui;
+package org.hcilab.projects.nlogx.ui;
 
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -13,11 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import org.hcilab.projects.nlog.R;
-import org.hcilab.projects.nlog.misc.Const;
-import org.hcilab.projects.nlog.misc.DatabaseHelper;
-import org.hcilab.projects.nlog.misc.ExportTask;
-import org.hcilab.projects.nlog.service.NotificationHandler;
+import org.hcilab.projects.nlogx.R;
+import org.hcilab.projects.nlogx.misc.Const;
+import org.hcilab.projects.nlogx.misc.DatabaseHelper;
+import org.hcilab.projects.nlogx.misc.ExportTask;
+import org.hcilab.projects.nlogx.service.NotificationHandler;
 
 public class MainActivity extends AppCompatActivity {
 

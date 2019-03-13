@@ -1,4 +1,4 @@
-package org.hcilab.projects.nlog.ui;
+package org.hcilab.projects.nlogx.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.hcilab.projects.nlog.R;
-import org.hcilab.projects.nlog.misc.Const;
-import org.hcilab.projects.nlog.misc.DatabaseHelper;
-import org.hcilab.projects.nlog.misc.Util;
+import org.hcilab.projects.nlogx.R;
+import org.hcilab.projects.nlogx.misc.Const;
+import org.hcilab.projects.nlogx.misc.DatabaseHelper;
+import org.hcilab.projects.nlogx.misc.Util;
 import org.json.JSONException;
 import org.json.JSONObject;
 

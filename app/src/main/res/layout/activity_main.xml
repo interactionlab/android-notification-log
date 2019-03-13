@@ -7,7 +7,7 @@
     tools:context=".ui.MainActivity">
 
     <fragment
-        android:name="org.hcilab.projects.nlog.ui.SettingsFragment"
+        android:name="org.hcilab.projects.nlogx.ui.SettingsFragment"
         android:tag=".SettingsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -1,4 +1,4 @@
-package org.hcilab.projects.nlog.ui;
+package org.hcilab.projects.nlogx.ui;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,12 +12,12 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
 
-import org.hcilab.projects.nlog.BuildConfig;
-import org.hcilab.projects.nlog.R;
-import org.hcilab.projects.nlog.misc.Const;
-import org.hcilab.projects.nlog.misc.DatabaseHelper;
-import org.hcilab.projects.nlog.misc.Util;
-import org.hcilab.projects.nlog.service.NotificationHandler;
+import org.hcilab.projects.nlogx.BuildConfig;
+import org.hcilab.projects.nlogx.R;
+import org.hcilab.projects.nlogx.misc.Const;
+import org.hcilab.projects.nlogx.misc.DatabaseHelper;
+import org.hcilab.projects.nlogx.misc.Util;
+import org.hcilab.projects.nlogx.service.NotificationHandler;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 

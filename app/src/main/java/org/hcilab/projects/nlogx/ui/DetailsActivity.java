@@ -1,4 +1,4 @@
-package org.hcilab.projects.nlog.ui;
+package org.hcilab.projects.nlogx.ui;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.hcilab.projects.nlog.R;
-import org.hcilab.projects.nlog.misc.Const;
-import org.hcilab.projects.nlog.misc.DatabaseHelper;
-import org.hcilab.projects.nlog.misc.Util;
+import org.hcilab.projects.nlogx.R;
+import org.hcilab.projects.nlogx.misc.Const;
+import org.hcilab.projects.nlogx.misc.DatabaseHelper;
+import org.hcilab.projects.nlogx.misc.Util;
 import org.json.JSONException;
 import org.json.JSONObject;
 

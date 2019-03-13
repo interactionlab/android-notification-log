@@ -1,4 +1,4 @@
-package org.hcilab.projects.nlog.ui;
+package org.hcilab.projects.nlogx.ui;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.hcilab.projects.nlog.R;
+import org.hcilab.projects.nlogx.R;
 
 class BrowseViewHolder extends RecyclerView.ViewHolder {
 

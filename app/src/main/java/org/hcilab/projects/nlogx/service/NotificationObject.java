@@ -1,4 +1,4 @@
-package org.hcilab.projects.nlog.service;
+package org.hcilab.projects.nlogx.service;
 
 import android.app.Notification;
 import android.content.Context;
@@ -10,9 +10,9 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
 
-import org.hcilab.projects.nlog.BuildConfig;
-import org.hcilab.projects.nlog.misc.Const;
-import org.hcilab.projects.nlog.misc.Util;
+import org.hcilab.projects.nlogx.BuildConfig;
+import org.hcilab.projects.nlogx.misc.Const;
+import org.hcilab.projects.nlogx.misc.Util;
 import org.json.JSONObject;
 
 import java.util.Arrays;

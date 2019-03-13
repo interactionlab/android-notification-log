@@ -12,8 +12,8 @@
         tools:targetApi="n_mr1">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="org.hcilab.projects.nlog"
-            android:targetClass="org.hcilab.projects.nlog.ui.BrowseActivity" />
+            android:targetPackage="org.hcilab.projects.nlogx"
+            android:targetClass="org.hcilab.projects.nlogx.ui.BrowseActivity" />
     </shortcut>
 
 </shortcuts>

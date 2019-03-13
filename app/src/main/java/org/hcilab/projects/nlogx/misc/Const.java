@@ -1,6 +1,6 @@
-package org.hcilab.projects.nlog.misc;
+package org.hcilab.projects.nlogx.misc;
 
-import org.hcilab.projects.nlog.BuildConfig;
+import org.hcilab.projects.nlogx.BuildConfig;
 
 public class Const {
 
