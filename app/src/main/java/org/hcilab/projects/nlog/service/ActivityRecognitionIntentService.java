@@ -25,6 +25,10 @@ public class ActivityRecognitionIntentService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(@Nullable Intent intent) {
+		if(intent == null) {
+			return;
+		}
+
 		ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
 
 		ArrayList<DetectedActivity> detectedActivities = (ArrayList<DetectedActivity>) result.getProbableActivities();
