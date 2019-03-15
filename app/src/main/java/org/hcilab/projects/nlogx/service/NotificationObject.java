@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
-import android.support.v4.app.NotificationCompat;
 
 import org.hcilab.projects.nlogx.BuildConfig;
 import org.hcilab.projects.nlogx.misc.Const;
@@ -18,6 +17,8 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TimeZone;
+
+import androidx.core.app.NotificationCompat;
 
 class NotificationObject {
 

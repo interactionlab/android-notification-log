@@ -8,9 +8,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.FileProvider;
 import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.hcilab.projects.nlogx.BuildConfig;
 import org.hcilab.projects.nlogx.R;
@@ -25,6 +25,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import androidx.core.content.FileProvider;
 
 public class ExportTask extends AsyncTask<Void, Void, Void> {
 

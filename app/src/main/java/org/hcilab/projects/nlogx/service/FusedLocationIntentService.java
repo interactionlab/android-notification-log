@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 
 import com.google.android.gms.location.LocationResult;
 
@@ -14,6 +13,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.TimeZone;
+
+import androidx.annotation.Nullable;
 
 public class FusedLocationIntentService extends IntentService {
 

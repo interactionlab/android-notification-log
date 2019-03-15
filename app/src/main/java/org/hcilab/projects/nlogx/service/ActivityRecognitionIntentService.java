@@ -4,7 +4,6 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
@@ -16,6 +15,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.TimeZone;
+
+import androidx.annotation.Nullable;
 
 public class ActivityRecognitionIntentService extends IntentService {
 

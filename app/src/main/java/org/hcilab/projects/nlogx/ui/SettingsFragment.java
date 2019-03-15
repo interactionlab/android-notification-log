@@ -7,10 +7,6 @@ import android.content.IntentFilter;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.preference.PreferenceManager;
 
 import org.hcilab.projects.nlogx.BuildConfig;
 import org.hcilab.projects.nlogx.R;
@@ -18,6 +14,11 @@ import org.hcilab.projects.nlogx.misc.Const;
 import org.hcilab.projects.nlogx.misc.DatabaseHelper;
 import org.hcilab.projects.nlogx.misc.Util;
 import org.hcilab.projects.nlogx.service.NotificationHandler;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 

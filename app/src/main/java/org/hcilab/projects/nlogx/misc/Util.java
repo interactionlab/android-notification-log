@@ -13,12 +13,13 @@ import android.os.Build;
 import android.os.LocaleList;
 import android.os.PowerManager;
 import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
 
 import org.hcilab.projects.nlogx.BuildConfig;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.core.content.ContextCompat;
 
 public class Util {
 
