@@ -30,7 +30,6 @@ public class NotificationListener extends NotificationListenerService {
 	private FusedLocationProviderClient fusedLocationClient = null;
 	private PendingIntent fusedLocationPendingIntent = null;
 
-
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -99,6 +98,29 @@ public class NotificationListener extends NotificationListenerService {
 		} catch (Exception e) {
 			if(Const.DEBUG) e.printStackTrace();
 		}
+	}
+
+	public static StatusBarNotification[] getAllActiveNotifications() {
+		if(instance != null) {
+			try {
+				return instance.getActiveNotifications();
+			} catch (Exception e) {
+				if(Const.DEBUG) e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	@TargetApi(Build.VERSION_CODES.O)
+	public static StatusBarNotification[] getAllSnoozedNotifications() {
+		if(instance != null) {
+			try {
+				return instance.getSnoozedNotifications();
+			} catch (Exception e) {
+				if(Const.DEBUG) e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
