@@ -1,37 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Preference
         android:key="pref_status"
         android:title="@string/settings_status"
-        android:summary="@string/settings_notification_access_unknown" />
+        android:summary="@string/settings_notification_access_unknown"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreference
         android:key="pref_text"
         android:title="@string/settings_text"
         android:summary="@string/settings_text_summary"
-        android:defaultValue="true" />
+        android:defaultValue="true"
+        app:iconSpaceReserved="false" />
 
     <SwitchPreference
         android:key="pref_ongoing"
         android:title="@string/settings_ongoing"
         android:summary="@string/settings_ongoing_summary"
-        android:defaultValue="false" />
+        android:defaultValue="false"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:key="pref_browse"
-        android:title="@string/settings_browse" />
+        android:title="@string/settings_browse"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:key="pref_entries"
         android:title="@string/settings_entries"
         android:summary="0"
-        android:enabled="false" />
+        android:enabled="false"
+        app:iconSpaceReserved="false" />
 
     <Preference
         android:key="pref_version"
         android:title="@string/settings_version"
         android:summary="0"
-        android:enabled="false" />
+        android:enabled="false"
+        app:iconSpaceReserved="false" />
 
 </PreferenceScreen>
