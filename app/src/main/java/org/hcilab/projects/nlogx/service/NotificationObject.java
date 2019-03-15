@@ -246,7 +246,7 @@ class NotificationObject {
 			json.put("actionCount",    actionCount);
 			json.put("isLocalOnly",    isLocalOnly);
 
-			json.put("people",         people);
+			json.put("people",         people == null ? 0 : people.size());
 			json.put("style",          style);
 			//json.put("displayName",    displayName);
 
