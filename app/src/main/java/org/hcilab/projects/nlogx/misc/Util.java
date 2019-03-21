@@ -19,7 +19,7 @@ import org.hcilab.projects.nlogx.BuildConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.core.content.ContextCompat;
+import androidx.core.content.PermissionChecker;
 
 public class Util {
 
@@ -72,22 +72,30 @@ public class Util {
 
 	public static int getRingerMode(Context context) {
 		AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-		if(am == null) {
-			return -1;
+		if(am != null) {
+			try {
+				return am.getRingerMode();
+			} catch (Exception e) {
+				if(Const.DEBUG) e.printStackTrace();
+			}
 		}
-		return am.getRingerMode();
+		return -1;
 	}
 
 	public static boolean isScreenOn(Context context) {
 		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-		if(pm == null) {
-			return false;
+		if(pm != null) {
+			try {
+				if(Build.VERSION.SDK_INT >= 20) {
+					return pm.isInteractive();
+				} else {
+					return pm.isScreenOn();
+				}
+			} catch (Exception e) {
+				if(Const.DEBUG) e.printStackTrace();
+			}
 		}
-		if(Build.VERSION.SDK_INT >= 20) {
-			return pm.isInteractive();
-		} else {
-			return pm.isScreenOn();
-		}
+		return false;
 	}
 
 	public static String getLocale(Context context) {
@@ -100,7 +108,7 @@ public class Util {
 	}
 
 	public static boolean hasPermission(Context context, String permission) {
-		return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
+		return PermissionChecker.checkSelfPermission(context, permission) == PermissionChecker.PERMISSION_GRANTED;
 	}
 
 	public static String[] getAllInstalledApps(Context context) {
@@ -114,64 +122,79 @@ public class Util {
 	}
 
 	public static int getBatteryLevel(Context context) {
-		int batteryLevel = -1;
 		if(Build.VERSION.SDK_INT >= 21) {
 			BatteryManager bm = (BatteryManager) context.getSystemService(Context.BATTERY_SERVICE);
 			if (bm != null) {
-				batteryLevel = bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+				try {
+					return bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+				} catch (Exception e) {
+					if(Const.DEBUG) e.printStackTrace();
+				}
 			}
 		}
-		return batteryLevel;
+		return -1;
 	}
 
 	public static String getBatteryStatus(Context context) {
 		if(Build.VERSION.SDK_INT < 26) {
 			return "not supported";
 		}
-		BatteryManager bm = (BatteryManager) context.getSystemService(Context.BATTERY_SERVICE);
-		if(bm != null) {
-			int status = bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_STATUS);
-			switch (status) {
-				case BatteryManager.BATTERY_STATUS_CHARGING: return "charging";
-				case BatteryManager.BATTERY_STATUS_DISCHARGING: return "discharging";
-				case BatteryManager.BATTERY_STATUS_FULL: return "full";
-				case BatteryManager.BATTERY_STATUS_NOT_CHARGING: return "not charging";
-				case BatteryManager.BATTERY_STATUS_UNKNOWN: return "unknown";
-				default: return ""+status;
+		try {
+			BatteryManager bm = (BatteryManager) context.getSystemService(Context.BATTERY_SERVICE);
+			if(bm != null) {
+				int status = bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_STATUS);
+				switch (status) {
+					case BatteryManager.BATTERY_STATUS_CHARGING: return "charging";
+					case BatteryManager.BATTERY_STATUS_DISCHARGING: return "discharging";
+					case BatteryManager.BATTERY_STATUS_FULL: return "full";
+					case BatteryManager.BATTERY_STATUS_NOT_CHARGING: return "not charging";
+					case BatteryManager.BATTERY_STATUS_UNKNOWN: return "unknown";
+					default: return ""+status;
+				}
 			}
+		} catch (Exception e) {
+			if(Const.DEBUG) e.printStackTrace();
 		}
 		return "undefined";
 	}
 
 	public static boolean isNetworkAvailable(Context context) {
 		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		if(cm == null) {
-			return false;
+		if(cm != null) {
+			try {
+				NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
+				return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+			} catch (Exception e) {
+				if(Const.DEBUG) e.printStackTrace();
+			}
 		}
-		NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
-		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+		return false;
 	}
 
 	public static String getConnectivityType(Context context) {
-		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		if(cm != null) {
-			NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-			if(networkInfo != null) {
-				int type = networkInfo.getType();
-				switch (type) {
-					case ConnectivityManager.TYPE_BLUETOOTH: return "bluetooth";
-					case ConnectivityManager.TYPE_DUMMY: return "dummy";
-					case ConnectivityManager.TYPE_ETHERNET: return "ethernet";
-					case ConnectivityManager.TYPE_MOBILE: return "mobile";
-					case ConnectivityManager.TYPE_MOBILE_DUN: return "mobile dun";
-					case ConnectivityManager.TYPE_VPN: return "vpn";
-					case ConnectivityManager.TYPE_WIFI: return "wifi";
-					case ConnectivityManager.TYPE_WIMAX: return "wimax";
-					default: return ""+type;
+		try {
+			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			if(cm != null) {
+				NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+				if(networkInfo != null) {
+					int type = networkInfo.getType();
+					switch (type) {
+						case ConnectivityManager.TYPE_BLUETOOTH: return "bluetooth";
+						case ConnectivityManager.TYPE_DUMMY: return "dummy";
+						case ConnectivityManager.TYPE_ETHERNET: return "ethernet";
+						case ConnectivityManager.TYPE_MOBILE: return "mobile";
+						case ConnectivityManager.TYPE_MOBILE_DUN: return "mobile dun";
+						case ConnectivityManager.TYPE_VPN: return "vpn";
+						case ConnectivityManager.TYPE_WIFI: return "wifi";
+						case ConnectivityManager.TYPE_WIMAX: return "wimax";
+						default: return ""+type;
+					}
+				} else {
+					return "none";
 				}
-			} else {
-				return "none";
 			}
+		} catch (Exception e) {
+			if(Const.DEBUG) e.printStackTrace();
 		}
 		return "undefined";
 	}
