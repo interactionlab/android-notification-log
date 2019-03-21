@@ -1,41 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Notification Log X</string>
+    <string name="app_name" translatable="false">Notification Log X</string>
+    <string name="notification_access_label">@string/app_name</string>
 
+    <!-- Activities -->
     <string name="activity_browse">Browse</string>
     <string name="activity_details">Details</string>
 
-    <string name="menu_delete">Delete log</string>
-    <string name="menu_export">Export log</string>
+    <!-- Menu -->
+    <string name="menu_about">About</string>
     <string name="menu_refresh">Refresh</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_export">Export</string>
 
+    <!-- Settings categories -->
+    <string name="category_settings">Settings</string>
+    <string name="category_actions">Actions</string>
+
+    <!-- Status -->
     <string name="settings_status">Status</string>
     <string name="settings_notification_access_unknown">Unknown</string>
     <string name="settings_notification_access_enabled">Enabled</string>
-    <string name="settings_notification_access_disabled">Disabled</string>
+    <string name="settings_notification_access_disabled">Disabled — Click here to enable</string>
 
-    <string name="settings_text">Text</string>
-    <string name="settings_text_summary">Log the notifications\' text. Increases the size of the log file but allows you to read past messages.</string>
+    <!-- Browse -->
+    <string name="settings_browse">Browse notifications</string>
+    <string name="settings_browse_summary">Click here to see the most recent notifications.</string>
 
-    <string name="settings_ongoing">Ongoing</string>
+    <!-- Notifications logged -->
+    <string name="settings_entries">Notifications logged</string>
+
+    <!-- Log text -->
+    <string name="settings_text">Log text</string>
+    <string name="settings_text_summary">Log the actual content of the notifications. Increases the size of the log file but allows you to read past messages.</string>
+
+    <!-- Log ongoing -->
+    <string name="settings_ongoing">Log ongoing</string>
     <string name="settings_ongoing_summary">Log ongoing notifications, for example download progresses. Creates a large number of additional log entries.</string>
 
-    <string name="settings_browse">Browse</string>
-    <string name="settings_browse_summary">Look at the most recent notifications</string>
+    <!-- Export -->
+    <string name="snackbar_export">Exporting… please wait…</string>
 
-    <string name="settings_entries">Notifications logged</string>
-    <string name="settings_version">Version</string>
-
+    <!-- Delete -->
     <string name="dialog_delete_header">Confirm deletion</string>
     <string name="dialog_delete_text">Do you really want to delete the log file? This cannot be undone.</string>
     <string name="dialog_delete_yes">Delete</string>
     <string name="dialog_delete_no">Cancel</string>
 
-    <string name="snackbar_export">Exporting… please wait…</string>
+    <!-- Version -->
+    <string name="settings_version">Version</string>
 
+    <!-- Details -->
     <string name="details_error">Unable to load the details of this entry.</string>
+    <string name="empty_log_file">No notifications logged yet!</string>
+    <string name="open_notification_settings">Notification Settings</string>
 
-    <string name="empty_log_file">No notifications logged yet! Is the notification access enabled?</string>
+    <!-- Delete Notification -->
+    <string name="delete_dialog_title">Delete notification</string>
+    <string name="delete_dialog_text">Do you really want to delete this notification? This cannot be undone.</string>
+    <string name="delete_dialog_yes">Delete</string>
+    <string name="delete_dialog_no">Cancel</string>
 
 </resources>

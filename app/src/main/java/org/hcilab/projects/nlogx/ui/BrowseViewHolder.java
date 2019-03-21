@@ -16,6 +16,7 @@ class BrowseViewHolder extends RecyclerView.ViewHolder {
 	public TextView name;
 	public TextView preview;
 	public TextView text;
+	public TextView date;
 
 	BrowseViewHolder(View view) {
 		super(view);
@@ -24,6 +25,7 @@ class BrowseViewHolder extends RecyclerView.ViewHolder {
 		name = view.findViewById(R.id.name);
 		preview = view.findViewById(R.id.preview);
 		text = view.findViewById(R.id.text);
+		date = view.findViewById(R.id.date);
 	}
 
 }

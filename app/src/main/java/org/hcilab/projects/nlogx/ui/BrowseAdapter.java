@@ -1,10 +1,13 @@
 package org.hcilab.projects.nlogx.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,53 +19,39 @@ import org.hcilab.projects.nlogx.misc.Util;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 
 class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 
-	private Context context;
+	private final static int LIMIT = Integer.MAX_VALUE;
+	private final static String PAGE_SIZE = "20";
+
+	private DateFormat format = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.getDefault());
+
+	private Activity context;
 	private ArrayList<DataItem> data = new ArrayList<>();
 	private HashMap<String, Drawable> iconCache = new HashMap<>();
+	private Handler handler = new Handler();
 
-	BrowseAdapter(Context context) {
+	private String lastDate = "";
+	private boolean shouldLoadMore = true;
+
+	BrowseAdapter(Activity context) {
 		this.context = context;
-
-		try {
-			DatabaseHelper databaseHelper = new DatabaseHelper(context);
-			SQLiteDatabase db = databaseHelper.getReadableDatabase();
-
-			Cursor cursor = db.query(DatabaseHelper.PostedEntry.TABLE_NAME,
-					new String[] {
-							DatabaseHelper.PostedEntry._ID,
-							DatabaseHelper.PostedEntry.COLUMN_NAME_CONTENT
-					},
-					null,
-					null,
-					null,
-					null,
-					DatabaseHelper.PostedEntry._ID + " DESC",
-					"100");
-
-			if(cursor != null && cursor.moveToFirst()) {
-				for(int i = 0; i < cursor.getCount(); i++) {
-					data.add(new DataItem(context, cursor.getLong(0), cursor.getString(1)));
-					cursor.moveToNext();
-				}
-				cursor.close();
-			}
-
-			db.close();
-			databaseHelper.close();
-		} catch (Exception e) {
-			if(Const.DEBUG) e.printStackTrace();
-		}
+		loadMore(Integer.MAX_VALUE);
 	}
 
+	@NonNull
 	@Override
-	public BrowseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+	public BrowseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_browse, parent, false);
 		BrowseViewHolder vh = new BrowseViewHolder(view);
 		vh.item.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +61,13 @@ class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 				if(id != null) {
 					Intent intent = new Intent(context, DetailsActivity.class);
 					intent.putExtra(DetailsActivity.EXTRA_ID, id);
-					context.startActivity(intent);
+					if(Build.VERSION.SDK_INT >= 21) {
+						Pair<View, String> p1 = Pair.create(vh.icon, "icon");
+						ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, p1);
+						context.startActivityForResult(intent, 1, options.toBundle());
+					} else {
+						context.startActivityForResult(intent, 1);
+					}
 				}
 			}
 		});
@@ -80,7 +75,7 @@ class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 	}
 
 	@Override
-	public void onBindViewHolder(BrowseViewHolder vh, int position) {
+	public void onBindViewHolder(@NonNull BrowseViewHolder vh, int position) {
 		DataItem item = data.get(position);
 
 		if(iconCache.containsKey(item.getPackageName()) && iconCache.get(item.getPackageName()) != null) {
@@ -101,11 +96,86 @@ class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 			vh.preview.setVisibility(View.VISIBLE);
 			vh.preview.setText(item.getPreview());
 		}
+
+		if(item.shouldShowDate()) {
+			vh.date.setVisibility(View.VISIBLE);
+			vh.date.setText(item.getDate());
+		} else {
+			vh.date.setVisibility(View.GONE);
+		}
+
+		if(position == getItemCount() - 1) {
+			loadMore(item.getId());
+		}
 	}
 
 	@Override
 	public int getItemCount() {
 		return data.size();
+	}
+
+	private void loadMore(long afterId) {
+		if(!shouldLoadMore) {
+			if(Const.DEBUG) System.out.println("not loading more items");
+			return;
+		}
+
+		if(Const.DEBUG) System.out.println("loading more items");
+		int before = getItemCount();
+		try {
+			DatabaseHelper databaseHelper = new DatabaseHelper(context);
+			SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+			Cursor cursor = db.query(DatabaseHelper.PostedEntry.TABLE_NAME,
+					new String[] {
+							DatabaseHelper.PostedEntry._ID,
+							DatabaseHelper.PostedEntry.COLUMN_NAME_CONTENT
+					},
+					DatabaseHelper.PostedEntry._ID + " < ?",
+					new String[] {""+afterId},
+					null,
+					null,
+					DatabaseHelper.PostedEntry._ID + " DESC",
+					PAGE_SIZE);
+
+			if(cursor != null && cursor.moveToFirst()) {
+				for(int i = 0; i < cursor.getCount(); i++) {
+					DataItem dataItem = new DataItem(context, cursor.getLong(0), cursor.getString(1));
+
+					String thisDate = dataItem.getDate();
+					if(lastDate.equals(thisDate)) {
+						dataItem.setShowDate(false);
+					}
+					lastDate = thisDate;
+
+					data.add(dataItem);
+					cursor.moveToNext();
+				}
+				cursor.close();
+			}
+
+			db.close();
+			databaseHelper.close();
+		} catch (Exception e) {
+			if(Const.DEBUG) e.printStackTrace();
+		}
+		int after = getItemCount();
+
+		if(before == after) {
+			if(Const.DEBUG) System.out.println("no new items loaded: " + getItemCount());
+			shouldLoadMore = false;
+		}
+
+		if(getItemCount() > LIMIT) {
+			if(Const.DEBUG) System.out.println("reached the limit, not loading more items: " + getItemCount());
+			shouldLoadMore = false;
+		}
+
+		handler.post(new Runnable(){
+			public void run(){
+				notifyDataSetChanged();
+			}
+		});
 	}
 
 	private class DataItem {
@@ -115,6 +185,8 @@ class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 		private String appName;
 		private String text;
 		private String preview;
+		private String date;
+		private boolean showDate;
 
 		DataItem(Context context, long id, String str) {
 			this.id = id;
@@ -131,6 +203,9 @@ class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 				if(!iconCache.containsKey(packageName)) {
 					iconCache.put(packageName, Util.getAppIconFromPackage(context, packageName));
 				}
+
+				date = format.format(json.optLong("systemTime"));
+				showDate = true;
 			} catch (JSONException e) {
 				if(Const.DEBUG) e.printStackTrace();
 			}
@@ -140,7 +215,7 @@ class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 			return id;
 		}
 
-		String getPackageName() {
+		public String getPackageName() {
 			return packageName;
 		}
 
@@ -154,6 +229,18 @@ class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 
 		String getPreview() {
 			return preview;
+		}
+
+		String getDate() {
+			return date;
+		}
+
+		boolean shouldShowDate() {
+			return showDate;
+		}
+
+		void setShowDate(boolean showDate) {
+			this.showDate = showDate;
 		}
 
 	}

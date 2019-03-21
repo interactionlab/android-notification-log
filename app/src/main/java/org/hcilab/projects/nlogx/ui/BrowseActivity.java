@@ -1,5 +1,6 @@
 package org.hcilab.projects.nlogx.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,10 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-public class BrowseActivity extends AppCompatActivity {
+public class BrowseActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
 	private RecyclerView recyclerView;
+	private SwipeRefreshLayout swipeRefreshLayout;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,12 +28,19 @@ public class BrowseActivity extends AppCompatActivity {
 		RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 		recyclerView = findViewById(R.id.list);
 		recyclerView.setLayoutManager(layoutManager);
+
+		swipeRefreshLayout = findViewById(R.id.swiper);
+		swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+		swipeRefreshLayout.setOnRefreshListener(this);
+
+		update();
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		update();
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		if(data != null && DetailsActivity.ACTION_REFRESH.equals(data.getStringExtra(DetailsActivity.EXTRA_ACTION))) {
+			update();
+		}
 	}
 
 	@Override
@@ -56,7 +66,13 @@ public class BrowseActivity extends AppCompatActivity {
 
 		if(adapter.getItemCount() == 0) {
 			Toast.makeText(this, R.string.empty_log_file, Toast.LENGTH_LONG).show();
+			finish();
 		}
 	}
 
+	@Override
+	public void onRefresh() {
+		update();
+		swipeRefreshLayout.setRefreshing(false);
+	}
 }
