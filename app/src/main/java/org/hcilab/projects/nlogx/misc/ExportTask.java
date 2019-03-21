@@ -32,7 +32,7 @@ public class ExportTask extends AsyncTask<Void, Void, Void> {
 
 	public static boolean exporting = false;
 
-	private static final String EXPORT_FILE_NAME = "notification_export_%s.txt";
+	private static final String EXPORT_FILE_NAME = "notification_export_%s.json";
 
 	private Context context;
 	private View view;
@@ -83,10 +83,10 @@ public class ExportTask extends AsyncTask<Void, Void, Void> {
 		try {
 			// Start writing
 			FileOutputStream outputStream = new FileOutputStream(newFile);
+			outputStream.write("{\n\n".getBytes());
 
 			// Device info
-			outputStream.write("# DEVICE".getBytes());
-			outputStream.write("\n".getBytes());
+			outputStream.write("\"device\": ".getBytes());
 
 			JSONObject json = new JSONObject();
 			try {
@@ -121,7 +121,7 @@ public class ExportTask extends AsyncTask<Void, Void, Void> {
 			}
 
 			outputStream.write(json.toString().getBytes());
-			outputStream.write("\n".getBytes());
+			outputStream.write(",\n\n".getBytes());
 
 			// Posted and removed notifications
 			DatabaseHelper dbHelper = new DatabaseHelper(context);
@@ -144,9 +144,7 @@ public class ExportTask extends AsyncTask<Void, Void, Void> {
 			String sortOrderRemoved =
 					DatabaseHelper.RemovedEntry._ID + " ASC";
 
-			outputStream.write("\n".getBytes());
-			outputStream.write("# POSTED".getBytes());
-			outputStream.write("\n".getBytes());
+			outputStream.write("\"posted\": [\n".getBytes());
 
 			c = db.query(DatabaseHelper.PostedEntry.TABLE_NAME,
 					projectionPosted,
@@ -160,16 +158,22 @@ public class ExportTask extends AsyncTask<Void, Void, Void> {
 				c.moveToFirst();
 				for(int i = 0; i < c.getCount(); i++) {
 					String content = c.getString(c.getColumnIndex(DatabaseHelper.PostedEntry.COLUMN_NAME_CONTENT));
+					outputStream.write("\t".getBytes());
 					outputStream.write(content.getBytes());
-					outputStream.write("\n".getBytes());
+
+					if(i == c.getCount() - 1) {
+						outputStream.write("\n".getBytes());
+					} else {
+						outputStream.write(",\n".getBytes());
+					}
+
 					c.moveToNext();
 				}
 				c.close();
 			}
 
-			outputStream.write("\n".getBytes());
-			outputStream.write("# REMOVED".getBytes());
-			outputStream.write("\n".getBytes());
+			outputStream.write("],\n\n".getBytes());
+			outputStream.write("\"removed\": [\n".getBytes());
 
 			c = db.query(DatabaseHelper.RemovedEntry.TABLE_NAME,
 					projectionRemoved,
@@ -183,12 +187,21 @@ public class ExportTask extends AsyncTask<Void, Void, Void> {
 				c.moveToFirst();
 				for(int i = 0; i < c.getCount(); i++) {
 					String content = c.getString(c.getColumnIndex(DatabaseHelper.RemovedEntry.COLUMN_NAME_CONTENT));
+					outputStream.write("\t".getBytes());
 					outputStream.write(content.getBytes());
-					outputStream.write("\n".getBytes());
+
+					if(i == c.getCount() - 1) {
+						outputStream.write("\n".getBytes());
+					} else {
+						outputStream.write(",\n".getBytes());
+					}
+
 					c.moveToNext();
 				}
 				c.close();
 			}
+
+			outputStream.write("]\n\n}".getBytes());
 
 			outputStream.close();
 
