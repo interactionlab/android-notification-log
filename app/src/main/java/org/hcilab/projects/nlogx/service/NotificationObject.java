@@ -59,6 +59,7 @@ class NotificationObject {
 	private String category;
 	private int actionCount;
 	private boolean isLocalOnly;
+
 	private List people;
 	private String style;
 
@@ -95,7 +96,7 @@ class NotificationObject {
 	private String textSummary;
 	private String textLines;
 
-	NotificationObject(Context context, StatusBarNotification sbn, final boolean LOG_TEXT, int reason, String activity) {
+	NotificationObject(Context context, StatusBarNotification sbn, final boolean LOG_TEXT, int reason) {
 		this.context = context;
 		this.LOG_TEXT = LOG_TEXT;
 
@@ -116,7 +117,6 @@ class NotificationObject {
 		}
 
 		removeReason = reason;
-		lastActivity = activity;
 
 		extract();
 
@@ -263,7 +263,7 @@ class NotificationObject {
 				json.put("textLines",         textLines);
 			}
 
-			json.put("appName",           appName);
+			json.put("appName", appName);
 
 			// 16
 			json.put("priority", priority);

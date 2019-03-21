@@ -32,8 +32,7 @@ public class NotificationHandler {
 			return;
 		}
 		boolean text = sp.getBoolean(Const.PREF_TEXT, true);
-		String lastActivity = sp.getString(Const.PREF_LAST_ACTIVITY, null);
-		NotificationObject no = new NotificationObject(context, sbn, text, -1, lastActivity);
+		NotificationObject no = new NotificationObject(context, sbn, text, -1);
 		log(DatabaseHelper.PostedEntry.TABLE_NAME, DatabaseHelper.PostedEntry.COLUMN_NAME_CONTENT, no.toString());
 	}
 
@@ -42,8 +41,7 @@ public class NotificationHandler {
 			if(Const.DEBUG) System.out.println("removed ongoing!");
 			return;
 		}
-		String lastActivity = sp.getString(Const.PREF_LAST_ACTIVITY, null);
-		NotificationObject no = new NotificationObject(context, sbn, false, reason, lastActivity);
+		NotificationObject no = new NotificationObject(context, sbn, false, reason);
 		log(DatabaseHelper.RemovedEntry.TABLE_NAME, DatabaseHelper.RemovedEntry.COLUMN_NAME_CONTENT, no.toString());
 	}
 
