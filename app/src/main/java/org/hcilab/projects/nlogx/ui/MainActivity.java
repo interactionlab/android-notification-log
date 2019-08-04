@@ -1,21 +1,21 @@
 package org.hcilab.projects.nlogx.ui;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import org.hcilab.projects.nlogx.R;
 import org.hcilab.projects.nlogx.misc.Const;
 import org.hcilab.projects.nlogx.misc.DatabaseHelper;
 import org.hcilab.projects.nlogx.misc.ExportTask;
 import org.hcilab.projects.nlogx.service.NotificationHandler;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_delete:
 				confirm();
@@ -49,17 +49,8 @@ public class MainActivity extends AppCompatActivity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
 		builder.setTitle(R.string.dialog_delete_header);
 		builder.setMessage(R.string.dialog_delete_text);
-		builder.setNegativeButton(R.string.dialog_delete_no, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialogInterface, int i) {
-			}
-		});
-		builder.setPositiveButton(R.string.dialog_delete_yes, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialogInterface, int i) {
-				truncate();
-			}
-		});
+		builder.setNegativeButton(R.string.dialog_delete_no, (dialogInterface, i) -> {});
+		builder.setPositiveButton(R.string.dialog_delete_yes, (dialogInterface, i) -> truncate());
 		builder.show();
 	}
 

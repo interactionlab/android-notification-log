@@ -7,13 +7,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import org.hcilab.projects.nlogx.R;
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import org.hcilab.projects.nlogx.R;
 
 public class BrowseActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -38,7 +39,8 @@ public class BrowseActivity extends AppCompatActivity implements SwipeRefreshLay
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-		if(data != null && DetailsActivity.ACTION_REFRESH.equals(data.getStringExtra(DetailsActivity.EXTRA_ACTION))) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (data != null && DetailsActivity.ACTION_REFRESH.equals(data.getStringExtra(DetailsActivity.EXTRA_ACTION))) {
 			update();
 		}
 	}
@@ -51,7 +53,7 @@ public class BrowseActivity extends AppCompatActivity implements SwipeRefreshLay
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_refresh:
 				update();

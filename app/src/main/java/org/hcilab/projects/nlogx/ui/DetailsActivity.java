@@ -18,6 +18,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import org.hcilab.projects.nlogx.R;
 import org.hcilab.projects.nlogx.misc.Const;
 import org.hcilab.projects.nlogx.misc.DatabaseHelper;
@@ -27,11 +33,6 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.util.Locale;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -80,7 +81,7 @@ public class DetailsActivity extends AppCompatActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 		if(item.getItemId() == R.id.menu_delete) {
 			confirmDelete();
 		}

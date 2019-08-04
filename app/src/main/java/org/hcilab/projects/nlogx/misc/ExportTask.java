@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.View;
 
+import androidx.core.content.FileProvider;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import org.hcilab.projects.nlogx.BuildConfig;
@@ -25,8 +27,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import androidx.core.content.FileProvider;
 
 public class ExportTask extends AsyncTask<Void, Void, Void> {
 
@@ -63,11 +63,13 @@ public class ExportTask extends AsyncTask<Void, Void, Void> {
 
 		// Clean up old exports
 		File[] oldFiles = exportPath.listFiles();
-		for(File oldFile : oldFiles) {
-			if(oldFile.isFile() && oldFile.getName().startsWith("notification_export")) {
-				boolean deleteResult = oldFile.delete();
-				if(Const.DEBUG) {
-					System.out.println("Existing cache file deleted: " + deleteResult);
+		if(oldFiles != null) {
+			for(File oldFile : oldFiles) {
+				if(oldFile.isFile() && oldFile.getName().startsWith("notification_export")) {
+					boolean deleteResult = oldFile.delete();
+					if(Const.DEBUG) {
+						System.out.println("Existing cache file deleted: " + deleteResult);
+					}
 				}
 			}
 		}

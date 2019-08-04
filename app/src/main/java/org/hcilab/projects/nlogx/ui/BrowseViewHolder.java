@@ -5,13 +5,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.hcilab.projects.nlogx.R;
-
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.hcilab.projects.nlogx.R;
 
 class BrowseViewHolder extends RecyclerView.ViewHolder {
 
-	LinearLayout item;
+	public LinearLayout item;
 	public ImageView icon;
 	public TextView name;
 	public TextView preview;

@@ -14,12 +14,12 @@ import android.os.LocaleList;
 import android.os.PowerManager;
 import android.provider.Settings;
 
+import androidx.core.content.PermissionChecker;
+
 import org.hcilab.projects.nlogx.BuildConfig;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.core.content.PermissionChecker;
 
 public class Util {
 
@@ -89,6 +89,7 @@ public class Util {
 				if(Build.VERSION.SDK_INT >= 20) {
 					return pm.isInteractive();
 				} else {
+					//noinspection deprecation
 					return pm.isScreenOn();
 				}
 			} catch (Exception e) {
@@ -103,6 +104,7 @@ public class Util {
 			LocaleList localeList = context.getResources().getConfiguration().getLocales();
 			return localeList.toString();
 		} else {
+			//noinspection deprecation
 			return context.getResources().getConfiguration().locale.toString();
 		}
 	}

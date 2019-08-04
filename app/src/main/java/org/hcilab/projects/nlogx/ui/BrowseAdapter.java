@@ -12,6 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.hcilab.projects.nlogx.R;
 import org.hcilab.projects.nlogx.misc.Const;
 import org.hcilab.projects.nlogx.misc.DatabaseHelper;
@@ -23,11 +28,6 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.util.Pair;
-import androidx.recyclerview.widget.RecyclerView;
 
 class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 
@@ -54,20 +54,17 @@ class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 	public BrowseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_browse, parent, false);
 		BrowseViewHolder vh = new BrowseViewHolder(view);
-		vh.item.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String id = (String) v.getTag();
-				if(id != null) {
-					Intent intent = new Intent(context, DetailsActivity.class);
-					intent.putExtra(DetailsActivity.EXTRA_ID, id);
-					if(Build.VERSION.SDK_INT >= 21) {
-						Pair<View, String> p1 = Pair.create(vh.icon, "icon");
-						ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, p1);
-						context.startActivityForResult(intent, 1, options.toBundle());
-					} else {
-						context.startActivityForResult(intent, 1);
-					}
+		vh.item.setOnClickListener(v -> {
+			String id = (String) v.getTag();
+			if(id != null) {
+				Intent intent = new Intent(context, DetailsActivity.class);
+				intent.putExtra(DetailsActivity.EXTRA_ID, id);
+				if(Build.VERSION.SDK_INT >= 21) {
+					Pair<View, String> p1 = Pair.create(vh.icon, "icon");
+					@SuppressWarnings("unchecked") ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, p1);
+					context.startActivityForResult(intent, 1, options.toBundle());
+				} else {
+					context.startActivityForResult(intent, 1);
 				}
 			}
 		});
@@ -171,11 +168,7 @@ class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 			shouldLoadMore = false;
 		}
 
-		handler.post(new Runnable(){
-			public void run(){
-				notifyDataSetChanged();
-			}
-		});
+		handler.post(() -> notifyDataSetChanged());
 	}
 
 	private class DataItem {
