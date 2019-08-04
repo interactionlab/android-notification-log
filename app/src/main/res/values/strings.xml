@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" translatable="false">Notification Log X</string>
+    <string name="app_name" translatable="false">Notification Log</string>
     <string name="notification_access_label">@string/app_name</string>
 
     <!-- Activities -->
@@ -25,19 +25,17 @@
     <string name="settings_notification_access_disabled">Disabled — Click here to enable</string>
 
     <!-- Browse -->
-    <string name="settings_browse">Browse notifications</string>
-    <string name="settings_browse_summary">Click here to see the most recent notifications.</string>
-
-    <!-- Notifications logged -->
-    <string name="settings_entries">Notifications logged</string>
+    <string name="settings_browse">Browse Notifications</string>
+    <string name="settings_browse_summary_singular">%1$d notification</string>
+    <string name="settings_browse_summary_plural">%1$d notifications</string>
 
     <!-- Log text -->
-    <string name="settings_text">Log text</string>
-    <string name="settings_text_summary">Log the actual content of the notifications. Increases the size of the log file but allows you to read past messages.</string>
+    <string name="settings_text">Log Text</string>
+    <string name="settings_text_summary">Log the actual notification content. This increases the size of the log file but allows you to read past messages.</string>
 
     <!-- Log ongoing -->
-    <string name="settings_ongoing">Log ongoing</string>
-    <string name="settings_ongoing_summary">Log ongoing notifications, for example download progresses. Creates a large number of additional log entries.</string>
+    <string name="settings_ongoing">Log Ongoing</string>
+    <string name="settings_ongoing_summary">Log ongoing notifications, such as downloads. This creates a large number of additional log entries.</string>
 
     <!-- Export -->
     <string name="snackbar_export">Exporting… please wait…</string>
@@ -47,6 +45,10 @@
     <string name="dialog_delete_text">Do you really want to delete the log file? This cannot be undone.</string>
     <string name="dialog_delete_yes">Delete</string>
     <string name="dialog_delete_no">Cancel</string>
+
+    <!-- About -->
+    <string name="settings_about">About</string>
+    <string name="settings_about_summary">Notification Log on GitHub. Licensed under the MIT License.</string>
 
     <!-- Version -->
     <string name="settings_version">Version</string>

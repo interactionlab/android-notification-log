@@ -6,7 +6,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import org.hcilab.projects.nlogx.BuildConfig;
 import org.hcilab.projects.nlogx.R;
@@ -14,11 +20,6 @@ import org.hcilab.projects.nlogx.misc.Const;
 import org.hcilab.projects.nlogx.misc.DatabaseHelper;
 import org.hcilab.projects.nlogx.misc.Util;
 import org.hcilab.projects.nlogx.service.NotificationHandler;
-
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -28,9 +29,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 	private BroadcastReceiver updateReceiver;
 
 	private Preference prefStatus;
+	private Preference prefBrowse;
 	private Preference prefText;
 	private Preference prefOngoing;
-	private Preference prefEntries;
 
 	@Override
 	public void onCreatePreferences(Bundle bundle, String s) {
@@ -39,27 +40,38 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 		PreferenceManager pm = getPreferenceManager();
 
 		prefStatus = pm.findPreference(Const.PREF_STATUS);
-		prefStatus.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
+		if(prefStatus != null) {
+			prefStatus.setOnPreferenceClickListener(preference -> {
 				startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
 				return true;
-			}
-		});
+			});
+		}
 
-		pm.findPreference(Const.PREF_BROWSE).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
+		prefBrowse = pm.findPreference(Const.PREF_BROWSE);
+		if(prefBrowse != null) {
+			prefBrowse.setOnPreferenceClickListener(preference -> {
 				startActivity(new Intent(getActivity(), BrowseActivity.class));
 				return true;
-			}
-		});
+			});
+		}
 
-		prefText = pm.findPreference(Const.PREF_TEXT);
+		prefText    = pm.findPreference(Const.PREF_TEXT);
 		prefOngoing = pm.findPreference(Const.PREF_ONGOING);
-		prefEntries = pm.findPreference(Const.PREF_ENTRIES);
 
-		pm.findPreference(Const.PREF_VERSION).setSummary(BuildConfig.VERSION_NAME + (Const.DEBUG ? " dev" : ""));
+		Preference prefAbout = pm.findPreference(Const.PREF_ABOUT);
+		if(prefAbout != null) {
+			prefAbout.setOnPreferenceClickListener(preference -> {
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse("https://github.com/interactionlab/android-notification-log"));
+				startActivity(intent);
+				return true;
+			});
+		}
+
+		Preference prefVersion = pm.findPreference(Const.PREF_VERSION);
+		if(prefVersion != null) {
+			prefVersion.setSummary(BuildConfig.VERSION_NAME + (Const.DEBUG ? " dev" : ""));
+		}
 	}
 
 	@Override
@@ -109,9 +121,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
 	private void update() {
 		try {
-			SQLiteDatabase db   = dbHelper.getReadableDatabase();
-			long numRowsPosted  = DatabaseUtils.queryNumEntries(db, DatabaseHelper.PostedEntry.TABLE_NAME);
-			prefEntries.setSummary("" + numRowsPosted);
+			SQLiteDatabase db = dbHelper.getReadableDatabase();
+			long numRowsPosted = DatabaseUtils.queryNumEntries(db, DatabaseHelper.PostedEntry.TABLE_NAME);
+			int stringResource = numRowsPosted == 1 ? R.string.settings_browse_summary_singular : R.string.settings_browse_summary_plural;
+			prefBrowse.setSummary(getString(stringResource, numRowsPosted));
 		} catch (Exception e) {
 			if(Const.DEBUG) e.printStackTrace();
 		}
