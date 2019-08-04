@@ -2,7 +2,7 @@
 
 An Open-Source Framework for Notification Research on Mobile Devices.
 
-* Supports Android 4.4 KitKat (API level 19) - Android Q 10.0 (API level 29)
+* Supports Android 4.4 KitKat (API level 19) - Android 10.0 Q (API level 29)
 * [Notification Log app in the Google Play Store](https://play.google.com/store/apps/details?id=org.hcilab.projects.nlog)
 * [Notification Log position paper in the ACM Digital Library](https://dl.acm.org/citation.cfm?doid=3267305.3274118)
 
