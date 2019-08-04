@@ -2,7 +2,7 @@
 
 An Open-Source Framework for Notification Research on Mobile Devices.
 
-* Supports Android 4.4 (API level 19) - Android 9.0 (API level 28)
+* Supports Android 4.4 KitKat (API level 19) - Android Q 10.0 (API level 29)
 * [Notification Log app in the Google Play Store](https://play.google.com/store/apps/details?id=org.hcilab.projects.nlog)
 * [Notification Log position paper in the ACM Digital Library](https://dl.acm.org/citation.cfm?doid=3267305.3274118)
 
@@ -12,7 +12,7 @@ An Open-Source Framework for Notification Research on Mobile Devices.
 
 ## Projects
 
-Notification Log was used in multiple studies.
+Notification Log was used in multiple studies:
 
 * Dominik Weber, Alexandra Voit, Gisela Kollotzek, Lucas van der Vekens, Marcus Hepting, Florian Alt, and Niels Henze. 2018. **PD Notify: Investigating Personal Content on Public Displays**. In Extended Abstracts of the 2018 CHI Conference on Human Factors in Computing Systems (CHI EA '18). ACM, New York, NY, USA, Paper LBW014, 6 pages. DOI: https://doi.org/10.1145/3170427.3188475
 * Dominik Weber, Alexandra Voit, Huy Viet Le, and Niels Henze. 2016. **Notification Dashboard: Enabling Reflection on Mobile Notifications**. In Proceedings of the 18th International Conference on Human-Computer Interaction with Mobile Devices and Services Adjunct (MobileHCI '16). ACM, New York, NY, USA, 936-941. DOI: https://doi.org/10.1145/2957265.2962660
@@ -21,7 +21,7 @@ Notification Log was used in multiple studies.
 
 ## Citation
 
-* Dominik Weber, Alexandra Voit, and Niels Henze. 2018. Notification Log: An Open-Source Framework for Notification Research on Mobile Devices. In Proceedings of the 2018 ACM International Joint Conference and 2018 International Symposium on Pervasive and Ubiquitous Computing and Wearable Computers (UbiComp '18). ACM, New York, NY, USA, 1271-1278. DOI: https://doi.org/10.1145/3267305.3274118 
+* Dominik Weber, Alexandra Voit, and Niels Henze. 2018. **Notification Log: An Open-Source Framework for Notification Research on Mobile Devices**. In Proceedings of the 2018 ACM International Joint Conference and 2018 International Symposium on Pervasive and Ubiquitous Computing and Wearable Computers (UbiComp '18). ACM, New York, NY, USA, 1271-1278. DOI: https://doi.org/10.1145/3267305.3274118 
 
 ```text
 @inproceedings{Weber:2018:NLO:3267305.3274118,
