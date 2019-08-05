@@ -212,7 +212,7 @@ class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 			return packageName;
 		}
 
-		String getAppName() {
+		public String getAppName() {
 			return appName;
 		}
 
@@ -220,19 +220,19 @@ class BrowseAdapter extends RecyclerView.Adapter<BrowseViewHolder> {
 			return text;
 		}
 
-		String getPreview() {
+		public String getPreview() {
 			return preview;
 		}
 
-		String getDate() {
+		public String getDate() {
 			return date;
 		}
 
-		boolean shouldShowDate() {
+		public boolean shouldShowDate() {
 			return showDate;
 		}
 
-		void setShowDate(boolean showDate) {
+		public void setShowDate(boolean showDate) {
 			this.showDate = showDate;
 		}
 
