@@ -9,6 +9,8 @@ import android.preference.PreferenceManager;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 
+import androidx.core.app.NotificationCompat;
+
 import org.hcilab.projects.nlogx.BuildConfig;
 import org.hcilab.projects.nlogx.misc.Const;
 import org.hcilab.projects.nlogx.misc.Util;
@@ -17,8 +19,6 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TimeZone;
-
-import androidx.core.app.NotificationCompat;
 
 class NotificationObject {
 
@@ -188,7 +188,7 @@ class NotificationObject {
 
 			if(extras != null) {
 				title       = Util.nullToEmptyString(extras.getCharSequence(NotificationCompat.EXTRA_TITLE));
-				titleBig    = Util.nullToEmptyString(extras.getCharSequence(NotificationCompat.EXTRA_TITLE));
+				titleBig    = Util.nullToEmptyString(extras.getCharSequence(NotificationCompat.EXTRA_TITLE_BIG));
 				text        = Util.nullToEmptyString(extras.getCharSequence(NotificationCompat.EXTRA_TEXT));
 				textBig     = Util.nullToEmptyString(extras.getCharSequence(NotificationCompat.EXTRA_BIG_TEXT));
 				textInfo    = Util.nullToEmptyString(extras.getCharSequence(NotificationCompat.EXTRA_INFO_TEXT));
