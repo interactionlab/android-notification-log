@@ -63,7 +63,7 @@ public class Util {
 		try {
 			ContentResolver contentResolver = context.getContentResolver();
 			String listeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners");
-			return !(listeners == null || !listeners.contains(BuildConfig.APPLICATION_ID));
+			return !(listeners == null || !listeners.contains(BuildConfig.APPLICATION_ID + "/"));
 		} catch(Exception e) {
 			if(Const.DEBUG) e.printStackTrace();
 		}
