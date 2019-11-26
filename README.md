@@ -18,6 +18,7 @@ In the past decade, the number of always-connected mobile devices exploded. Smar
 
 Notification Log was used in multiple studies:
 
+* Dominik Weber, Alexandra Voit, Gisela Kollotzek, and Niels Henze. 2019. **Annotif: A System for Annotating Mobile Notifications in User Studies**. In Proceedings of the 18th International Conference on Mobile and Ubiquitous Multimedia (MUM '19). ACM, New York, NY, USA, Article 24, 12 pages. DOI: https://doi.org/10.1145/3365610.3365611
 * Dominik Weber, Alexandra Voit, and Niels Henze. 2019. **Clear All: A Large-Scale Observational Study on Mobile Notification Drawers**. In Proceedings of Mensch und Computer 2019 (MuC '19). ACM, New York, NY, USA, 361-372. DOI: https://doi.org/10.1145/3340764.3340765
 * Dominik Weber, Alexandra Voit, Gisela Kollotzek, Lucas van der Vekens, Marcus Hepting, Florian Alt, and Niels Henze. 2018. **PD Notify: Investigating Personal Content on Public Displays**. In Extended Abstracts of the 2018 CHI Conference on Human Factors in Computing Systems (CHI EA '18). ACM, New York, NY, USA, Paper LBW014, 6 pages. DOI: https://doi.org/10.1145/3170427.3188475
 * Dominik Weber, Alexandra Voit, Huy Viet Le, and Niels Henze. 2016. **Notification Dashboard: Enabling Reflection on Mobile Notifications**. In Proceedings of the 18th International Conference on Human-Computer Interaction with Mobile Devices and Services Adjunct (MobileHCI '16). ACM, New York, NY, USA, 936-941. DOI: https://doi.org/10.1145/2957265.2962660
